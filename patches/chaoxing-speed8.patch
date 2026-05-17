@@ -1,0 +1,15 @@
+diff --git a/main.py b/main.py
+index d111871..478d703 100644
+--- a/main.py
++++ b/main.py
+@@ -490,8 +490,8 @@ def main():
+         # 初始化配置
+         common_config, tiku_config, notification_config = init_config()
+         
+-        # 强制播放按照配置文件调节
+-        common_config["speed"] = min(2.0, max(1.0, common_config.get("speed", 1.0)))
++        # 强制播放按照配置文件调节。桌面壳限制在 1~8，保留这里的上限兜底。
++        common_config["speed"] = min(8.0, max(1.0, common_config.get("speed", 1.0)))
+         common_config["notopen_action"] = common_config.get("notopen_action", "retry")
+         
+         # 初始化超星实例

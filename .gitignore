@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-electron/
+release/
+build/
+core/chaoxing/
+.DS_Store
+npm-debug.log*
+*.log
+*.dmg
+*.zip
+*.asar

@@ -1,0 +1,75 @@
+{
+  "name": "bk-xuexi-tong",
+  "version": "1.0.0",
+  "description": "bk学习捅 local macOS desktop assistant.",
+  "main": "dist-electron/main/main.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "setup:core": "bash scripts/setup-core.sh",
+    "apply:core-patches": "bash scripts/apply-core-patches.sh",
+    "check": "bash scripts/check-env.sh",
+    "prepare:runtime": "bash scripts/prepare-runtime.sh",
+    "build": "tsc --noEmit && electron-vite build",
+    "build:mac": "npm run prepare:runtime && CSC_IDENTITY_AUTO_DISCOVERY=false npm run build && electron-builder --mac --publish=never"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^3.0.1",
+    "@electron-toolkit/utils": "^3.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
+  },
+  "build": {
+    "appId": "com.local.bkxuexitong",
+    "productName": "bk学习捅",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "core/chaoxing",
+        "to": "core/chaoxing",
+        "filter": [
+          "**/*",
+          "!**/.git/**",
+          "!**/.venv/**",
+          "!**/__pycache__/**",
+          "!**/*.pyc",
+          "!cookies.txt",
+          "!config.ini"
+        ]
+      },
+      {
+        "from": "build/runtime",
+        "to": "runtime",
+        "filter": [
+          "**/*",
+          "!**/__pycache__/**",
+          "!**/*.pyc"
+        ]
+      }
+    ],
+    "mac": {
+      "target": "dir",
+      "identity": null,
+      "icon": "assets/icon.icns"
+    }
+  }
+}
